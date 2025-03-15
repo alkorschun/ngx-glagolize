@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add NgxGlagolize to the project.",
+      "factory": "./ng-add/index#ngAdd"
+    },
+    "language": {
+      "description": "Add a language file to the project.",
+      "factory": "./language/index#language",
+      "schema": "./language/schema.json"
+    },
+    "extract-keys": {
+      "description": "Extract keys from the project.",
+      "factory": "./extract-keys/index#extractTranslations",
+      "schema": "./extract-keys/schema.json"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "SchematicsLanguage",
+    "title": "Language Schema",
+    "type": "object",
+    "properties": {
+      "code": {
+        "description": "The code of the language.",
+        "type": "string"
+      },
+      "project": {
+        "type": "string",
+        "description": "The name of the project.",
+        "$default": {
+          "$source": "projectName"
+        }
+      }
+     },
+    "required": [
+      "code"
+    ]
+  }

@@ -1,0 +1,40 @@
+{
+  "name": "ngx-glagolize",
+  "version": "0.0.24",
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.schematics.json",
+    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-glagolize/",
+    "release": "release-it"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "sideEffects": false,
+  "release-it": {
+    "git": {
+      "tagName": "v${version}",
+      "requireCleanWorkingDir": true,
+      "commitMessage": "chore(release): v${version}",
+      "tagAnnotation": "Release v${version}",
+      "push": true
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "version": {
+      "rootPackageFile": "package.json",
+      "subPackageFile": "projects/ngx-glagolize/package.json"
+    }
+  }
+}
