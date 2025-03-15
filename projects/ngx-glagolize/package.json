@@ -1,6 +1,9 @@
 {
   "name": "ngx-glagolize",
   "version": "0.0.0",
+  "license": "MIT",
+  "author": "Alex Korschunow",
+  "repository": "https://github.com/alkorschun/ngx-glagolize",
   "peerDependencies": {
     "@angular/common": "^19.2.0",
     "@angular/core": "^19.2.0"
@@ -8,6 +11,10 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "keywords": [
+    "angular",
+    "translation"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
     "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/ngx-glagolize/",
