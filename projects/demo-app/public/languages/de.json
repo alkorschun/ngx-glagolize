@@ -1,4 +1,5 @@
 {
   "test": "Test",
-  "test_test": ""
+  "test_test": "",
+  "greeting": "Hallo {{name}}!"
 }

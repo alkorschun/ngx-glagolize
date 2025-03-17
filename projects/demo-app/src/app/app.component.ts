@@ -9,10 +9,11 @@ import { NgxGlagolizeDirective, NgxGlagolizeService } from 'ngx-glagolize';
 })
 export class AppComponent {
   title = 'demo-app';
+  placeholderValues = { name: 'Mirko' };
 
   ngxGlagolizeService = inject(NgxGlagolizeService);
 
   constructor() {
-    this.ngxGlagolizeService.init('en');
+    this.ngxGlagolizeService.init('de');
   }
 }
