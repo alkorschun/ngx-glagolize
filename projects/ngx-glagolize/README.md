@@ -71,6 +71,23 @@ There are two ways to provide some translation strings:
 2) Using the NgxGlagolizeService
     In the component.ts you can inject the NgxGlagolizeService und use the ``.get(key)`` method to retrieve a languge string
 
+### Placeholders
+In case you need to replace some placeholders in your strings you can pass an object with all values just like that:
+```html
+<div ngxGlagolize key="greeting" [placeholder]="placeholderValues">test translation</div>
+```
+In your component.ts you would define the ``placeholderValues`` like this:
+```typescript
+ placeholderValues = { name: 'Mirko' };
+```
+And use ``{{name}}`` in your language file:
+```json
+{
+  "greeting": "Hallo {{name}}!"
+}
+```
+
+### Extract translation keys
 Finally you don't have to write all the keys down. There is a command that extracts all used keys from your project and adds them to the languge files:
 ```sh
 ng generate ngx-glagolize:extract-keys --project demo-app
