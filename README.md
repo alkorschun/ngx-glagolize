@@ -2,76 +2,102 @@
 
 NgxGlagolize is an Angular library for handling translations and localization in your Angular applications.
 
-## How to Install
+## Installation
 
 To install NgxGlagolize, run the following command:
 
 ```sh
 ng add ngx-glagolize
 ```
-You have to provide HttpClient so the library works properly
+
+### Configuration
+
+You must provide `HttpClient` so that the library works properly. Add the following configuration to your `appConfig`:
 
 ```typescript
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(), //Provide this
-    provideNgxGlagolizeConfig({fallbackLanguage: 'en'})
-   
+    provideHttpClient(), // Required for NgxGlagolize
+    provideNgxGlagolizeConfig({ fallbackLanguage: 'en' })
   ],
 };
 ```
-The default config for NgxGlagolize is provided automatically after ``ng add``.
-You can change the fallback language for the case the user chooses a language that is not provided by you.
 
-## How to Use
+After running `ng add ngx-glagolize`, a default configuration is automatically provided. You can modify the fallback language to handle cases where a user selects an unsupported language.
 
-First of all you can generate languge files via following command
+## Usage
+
+### Generating Language Files
+
+Generate a language file using the following command:
+
 ```sh
 ng generate ngx-glagolize:language --code de --project demo-app
 ```
-This command generates a de.json languge file in your public directory.
-This file can be filled wit key value pairs.
+
+This creates a `de.json` language file in your public directory, which can be populated with key-value pairs:
+
 ```json
 {
-    "key": "value"
+  "key": "value"
 }
 ```
 
-In case you need an alternative for plural forms, you can use the following structure
+For plural forms, use the following structure:
+
 ```json
 {
-    "key": {"one": "value", "other":"values"}
+  "key": { "one": "value", "other": "values" }
 }
 ```
 
-Then next step should be a call that initiales the load of a language file. app.component.ts would be a good place to do that:
+### Initializing Language Loading
+
+Call the initialization method to load a language file. A good place for this is `app.component.ts`:
+
 ```typescript
- ngxGlagolizeService = inject(NgxGlagolizeService);
+ngxGlagolizeService = inject(NgxGlagolizeService);
 
-  constructor() {
-    this.ngxGlagolizeService.init('en');
-  }
+constructor() {
+  this.ngxGlagolizeService.init('en');
+}
 ```
 
-There are two ways to provide some translation strings:
+### Providing Translation Strings
 
-1) Using the NgxGlagolizeDirective
-    ```html
-    <div ngxGlagolize key="test">test translation</div>
-    ```
+NgxGlagolize offers two ways to use translation strings:
 
-    The key parameter is required. This key is extracted from the current loaded language file.
-    There is also an optional parameter to determine whether to use a singular or plural form of the word.
+#### 1. Using the `NgxGlagolizeDirective`
 
-    ```html
-    <div ngxGlagolize key="test" [plural]="true">test translation</div>
-    ```
-2) Using the NgxGlagolizeService
-    In the component.ts you can inject the NgxGlagolizeService und use the ``.get(key)`` method to retrieve a languge string
+```html
+<div ngxGlagolize key="test">test translation</div>
+```
 
-Finally you don't have to write all the keys down. There is a command that extracts all used keys from your project and adds them to the languge files:
+- The `key` parameter is required and maps to the corresponding value in the loaded language file.
+- To handle pluralization, use the `plural` parameter:
+
+```html
+<div ngxGlagolize key="test" [plural]="true">test translation</div>
+```
+
+#### 2. Using the `NgxGlagolizeService`
+
+Inject `NgxGlagolizeService` in your component and use the `.get(key)` method to retrieve a language string.
+
+```typescript
+private ngxGlagolizeService = inject(NgxGlagolizeService) 
+protected translatedString = this.ngxGlagolizeService.get('test');
+```
+
+### Extracting Translation Keys Automatically
+
+To avoid manually adding all translation keys, use the following command to extract them from your project and update language files:
+
 ```sh
 ng generate ngx-glagolize:extract-keys --project demo-app
 ```
+
+This ensures your language files contain all used keys, reducing the risk of missing translations.
+
