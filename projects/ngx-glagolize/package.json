@@ -24,6 +24,9 @@
   "ng-add": {
     "save": "dependencies"
   },
+  "ng-update": {
+    "migrations": "./schematics/migrations/migration.json"
+  },
   "sideEffects": false,
   "release-it": {
     "git": {
