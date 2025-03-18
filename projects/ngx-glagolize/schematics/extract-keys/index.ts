@@ -3,7 +3,7 @@ import { Rule, Tree, SchematicContext, SchematicsException } from '@angular-devk
 import { createHost } from '../utilities';
 import { Schema as ExtractTranslationsSchema } from './schema';
 
-const TRANSLATION_REGEX = /ngxGlagolize\s+(?:\[\s*key\s*\]|\bkey\b)\s*=\s*["']([^"']+)["']|this\.ngxGlagolizeService\.get\s*\(\s*["']([^"']+)["']\s*\)/g;
+const TRANSLATION_REGEX = /ngxGlagolize\s+(?:\[\s*key\s*\]|\bkey\b)\s*=\s*["'](?:'|")?([^"']+)(?:'|")?["']|this\.ngxGlagolizeService\.get\s*\(\s*["']([^"']+)["']\s*\)/g;
 
 function extractKeys(tree: Tree, dir: string, keys: Set<string>): void {
     tree.getDir(dir).subfiles.forEach(file => {
